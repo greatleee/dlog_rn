@@ -1,20 +1,32 @@
+import styled from '@emotion/native';
 import React from 'react';
 import { Button, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import RecordDrinkModalSection from '../components/RecordDrinkModal/Section';
 import RootNavigation from '../navigators/RootNavigation';
+
+const Container = styled.View`
+  padding: 20px 16px;
+`;
 
 const RecordDrinkModal = () => {
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Modal</Text>
+    <Container style={{ flex: 1 }}>
       <Button
         title="Dismiss"
         onPress={() => {
           RootNavigation.goBack();
         }}
       />
-    </SafeAreaView>
+      <RecordDrinkModalSection title="얼마나 마셨오?">
+        <Text>Test</Text>
+      </RecordDrinkModalSection>
+      <RecordDrinkModalSection title="마시고 상태가 어땠오?">
+        <Text>Test2</Text>
+      </RecordDrinkModalSection>
+      <RecordDrinkModalSection title="기분이 어땠오?">
+        <Text>Test3</Text>
+      </RecordDrinkModalSection>
+    </Container>
   );
 };
 
