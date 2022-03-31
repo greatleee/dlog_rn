@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCalendar } from '@h6s/calendar';
 import styled from '@emotion/native';
 import CalendarBodyItem from './CalendarBodyItem';
+import { useRecoilState } from 'recoil';
+import { curYearMonthAtom } from '../../atoms/states';
 
 const Container = styled.View`
   width: 100%;
@@ -22,8 +24,14 @@ const Td = styled.View`
 `;
 
 const CalendarBody: React.FC = () => {
+  const [curYearMonth] = useRecoilState(curYearMonthAtom);
+
   const defaultDate = new Date();
-  const { body } = useCalendar({ defaultDate });
+  const { body, navigation } = useCalendar({ defaultDate });
+
+  useEffect(() => {
+    navigation.setDate(new Date(curYearMonth));
+  }, [curYearMonth]);
 
   const getTrHeight = (rowLength: number) => {
     return `${Math.floor(100 / rowLength)}%`;
@@ -31,7 +39,6 @@ const CalendarBody: React.FC = () => {
 
   return (
     <Container>
-      {body.value.map}
       {body.value.map(({ key, value: days }) => (
         <Tr key={key} style={{ height: getTrHeight(body.value.length) }}>
           {days.map(({ key, date, isCurrentDate, isCurrentMonth }) => (

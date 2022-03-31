@@ -22,6 +22,7 @@ import {
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { RecoilRoot } from 'recoil';
 import TabBar from './components/@shared/TabBar';
 import RootNavigation from './navigators/RootNavigation';
 import Calendar from './screens/Calendar';
@@ -81,22 +82,24 @@ const App = () => {
   };
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer ref={RootNavigation.navigationRef}>
-        <RootStack.Navigator screenOptions={{ headerShown: false }}>
-          <RootStack.Group>
-            <RootStack.Screen name="Main" component={Main} />
-          </RootStack.Group>
-          <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-            <RootStack.Screen
-              name="RecordDrinkModal"
-              component={RecordDrinkModal}
-            />
-          </RootStack.Group>
-        </RootStack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <RecoilRoot>
+      <SafeAreaProvider>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <NavigationContainer ref={RootNavigation.navigationRef}>
+          <RootStack.Navigator screenOptions={{ headerShown: false }}>
+            <RootStack.Group>
+              <RootStack.Screen name="Main" component={Main} />
+            </RootStack.Group>
+            <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+              <RootStack.Screen
+                name="RecordDrinkModal"
+                component={RecordDrinkModal}
+              />
+            </RootStack.Group>
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </RecoilRoot>
   );
 };
 

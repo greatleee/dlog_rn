@@ -8,7 +8,7 @@ type Props = {
 
 const ChipContainer = styled.TouchableOpacity`
   border-radius: 100px;
-  padding: 2px 6px;
+  padding: 4px 12px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
