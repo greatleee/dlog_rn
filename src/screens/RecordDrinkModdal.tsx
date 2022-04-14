@@ -1,14 +1,31 @@
 import styled from '@emotion/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Text } from 'react-native';
-import RecordDrinkModalSection from '../components/RecordDrinkModal/Section';
-import RootNavigation from '../navigators/RootNavigation';
+import { useSetRecoilState } from 'recoil';
+import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
+import RecordDrinkModalSection from '@components/RecordDrinkModal/Section';
+import { recordDrinkModalAtom } from '../atoms/recordDrinkModal.atoms';
+import RootNavigation, {
+  NavigatorParamList,
+} from '../navigators/RootNavigation';
+import { DrinkTypes } from '../models/drinkType';
+import { StackScreenProps } from '@react-navigation/stack';
 
-const Container = styled.View`
-  padding: 20px 16px;
-`;
+type Props = StackScreenProps<NavigatorParamList, 'RecordDrinkModal'>;
 
-const RecordDrinkModal = () => {
+const RecordDrinkModal: React.FC<Props> = ({ route }) => {
+  const setRecordDrinkModalState = useSetRecoilState(recordDrinkModalAtom);
+
+  useEffect(() => {
+    setRecordDrinkModalState({
+      createdAt: new Date(route.params.date),
+      drinkAmounts: [
+        { type: DrinkTypes.BEER, amount: 0 },
+        { type: DrinkTypes.SOJU, amount: 0 },
+      ],
+    });
+  }, []);
+
   return (
     <Container style={{ flex: 1 }}>
       <Button
@@ -17,9 +34,7 @@ const RecordDrinkModal = () => {
           RootNavigation.goBack();
         }}
       />
-      <RecordDrinkModalSection title="얼마나 마셨오?">
-        <Text>Test</Text>
-      </RecordDrinkModalSection>
+      <DrinkAmountSection />
       <RecordDrinkModalSection title="마시고 상태가 어땠오?">
         <Text>Test2</Text>
       </RecordDrinkModalSection>
@@ -29,5 +44,9 @@ const RecordDrinkModal = () => {
     </Container>
   );
 };
+
+const Container = styled.View`
+  padding: 20px 16px;
+`;
 
 export default RecordDrinkModal;

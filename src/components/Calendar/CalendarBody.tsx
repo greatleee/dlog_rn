@@ -41,9 +41,11 @@ const CalendarBody: React.FC = () => {
     <Container>
       {body.value.map(({ key, value: days }) => (
         <Tr key={key} style={{ height: getTrHeight(body.value.length) }}>
-          {days.map(({ key, date, isCurrentDate, isCurrentMonth }) => (
+          {days.map(({ key, value, date, isCurrentDate, isCurrentMonth }) => (
             <Td key={key}>
-              {isCurrentMonth && <CalendarBodyItem date={date} />}
+              {isCurrentMonth && (
+                <CalendarBodyItem date={value} dateNum={date} />
+              )}
             </Td>
           ))}
         </Tr>

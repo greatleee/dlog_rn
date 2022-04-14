@@ -3,7 +3,25 @@ import styled from '@emotion/native';
 import RootNavigation from '../../navigators/RootNavigation';
 
 type Props = {
-  date: number;
+  date: Date;
+  dateNum: number;
+};
+
+const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
+  const openRecordDrinkModal = () =>
+    RootNavigation.navigate('RecordDrinkModal', { date: date.toISOString() });
+
+  return (
+    <>
+      <DateText>{dateNum}</DateText>
+      <DrinkImageTouchable onPress={openRecordDrinkModal}>
+        <DrinkImage
+          source={require('../../assets/images/soju/empty.png')}
+          style={{ resizeMode: 'cover' }}
+        />
+      </DrinkImageTouchable>
+    </>
+  );
 };
 
 const DateText = styled.Text`
@@ -25,21 +43,5 @@ const DrinkImage = styled.Image`
   height: 90%;
   opacity: 0.3;
 `;
-
-const CalendarBodyItem: React.FC<Props> = ({ date }) => {
-  return (
-    <>
-      <DateText>{date}</DateText>
-      <DrinkImageTouchable
-        onPress={() => RootNavigation.navigate('RecordDrinkModal')}
-      >
-        <DrinkImage
-          source={require('../../assets/images/soju/empty.png')}
-          style={{ resizeMode: 'cover' }}
-        />
-      </DrinkImageTouchable>
-    </>
-  );
-};
 
 export default CalendarBodyItem;

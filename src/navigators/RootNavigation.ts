@@ -1,18 +1,23 @@
 import { createNavigationContainerRef } from '@react-navigation/native';
 
-type NavigatorParamList = {
+type RecordDrinkModalParams = {
+  date: string;
+};
+
+export type NavigatorParamList = {
   Calendar: undefined;
-  RecordDrinkModal: undefined;
+  RecordDrinkModal: RecordDrinkModalParams;
 };
 
 type NavigatorNameList = 'Calendar' | 'RecordDrinkModal';
+type ParamsType = RecordDrinkModalParams | undefined;
 
 const createRootNavigation = () => {
   const navigationRef = createNavigationContainerRef<NavigatorParamList>();
 
-  const navigate = (name: NavigatorNameList) => {
+  const navigate = (name: NavigatorNameList, params: ParamsType) => {
     if (navigationRef.isReady()) {
-      navigationRef.navigate(name);
+      navigationRef.navigate(name, params);
     }
   };
 
