@@ -1,15 +1,17 @@
+import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
+import RecordDrinkModalSection from '@components/RecordDrinkModal/Section';
 import styled from '@emotion/native';
+import { StackScreenProps } from '@react-navigation/stack';
+import { format } from 'date-fns';
+import locale from 'date-fns/locale/ko';
 import React, { useEffect } from 'react';
 import { Button, Text } from 'react-native';
 import { useSetRecoilState } from 'recoil';
-import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
-import RecordDrinkModalSection from '@components/RecordDrinkModal/Section';
 import { recordDrinkModalAtom } from '../atoms/recordDrinkModal.atoms';
+import { DrinkTypes } from '../models/drinkType';
 import RootNavigation, {
   NavigatorParamList,
 } from '../navigators/RootNavigation';
-import { DrinkTypes } from '../models/drinkType';
-import { StackScreenProps } from '@react-navigation/stack';
 
 type Props = StackScreenProps<NavigatorParamList, 'RecordDrinkModal'>;
 
@@ -28,12 +30,9 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <Button
-        title="Dismiss"
-        onPress={() => {
-          RootNavigation.goBack();
-        }}
-      />
+      <DateText>
+        {format(new Date(route.params.date), 'MM월 dd일 (E)', { locale })}
+      </DateText>
       <DrinkAmountSection />
       <RecordDrinkModalSection title="마시고 상태가 어땠오?">
         <Text>Test2</Text>
@@ -41,12 +40,25 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
       <RecordDrinkModalSection title="기분이 어땠오?">
         <Text>Test3</Text>
       </RecordDrinkModalSection>
+      <Button
+        title="Dismiss"
+        onPress={() => {
+          RootNavigation.goBack();
+        }}
+      />
     </Container>
   );
 };
 
 const Container = styled.View`
   padding: 20px 16px;
+`;
+
+const DateText = styled.Text`
+  width: 100%;
+  margin-bottom: 16px;
+  font-size: 20px;
+  text-align: center;
 `;
 
 export default RecordDrinkModal;
