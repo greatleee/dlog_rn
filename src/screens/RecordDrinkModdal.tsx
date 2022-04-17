@@ -1,5 +1,6 @@
 import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
 import RecordDrinkModalSection from '@components/RecordDrinkModal/Section';
+import StatusSection from '@components/RecordDrinkModal/StatusSection';
 import styled from '@emotion/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { format } from 'date-fns';
@@ -25,6 +26,7 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
         { type: DrinkTypes.BEER, amount: 0 },
         { type: DrinkTypes.SOJU, amount: 0 },
       ],
+      status: null,
     });
   }, []);
 
@@ -34,9 +36,7 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
         {format(new Date(route.params.date), 'MM월 dd일 (E)', { locale })}
       </DateText>
       <DrinkAmountSection />
-      <RecordDrinkModalSection title="마시고 상태가 어땠오?">
-        <Text>Test2</Text>
-      </RecordDrinkModalSection>
+      <StatusSection />
       <RecordDrinkModalSection title="기분이 어땠오?">
         <Text>Test3</Text>
       </RecordDrinkModalSection>

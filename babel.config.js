@@ -17,8 +17,11 @@ module.exports = {
           '.json',
         ],
         alias: {
+          '@atoms': './src/atoms',
           '@components': './src/components',
           '@constants': './src/constants',
+          '@images': './src/assets/images',
+          '@models': './src/models',
           '@screens': './src/screens',
         },
       },
