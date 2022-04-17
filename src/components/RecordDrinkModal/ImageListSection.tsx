@@ -1,11 +1,12 @@
 import styled from '@emotion/native';
+import { DrinkEmotionModelList } from '@models/drinkEmotion.models';
 import { DrinkStatusModelList } from '@models/drinkStatus.models';
 import React from 'react';
 import RecordDrinkModalSection from './Section';
 
 type Props = {
   title: string;
-  modelList: typeof DrinkStatusModelList;
+  modelList: typeof DrinkStatusModelList | typeof DrinkEmotionModelList;
   onPressImage: (type: any) => void;
   onChangeImage: (type: any) => number;
 };

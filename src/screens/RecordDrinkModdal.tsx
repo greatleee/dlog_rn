@@ -1,12 +1,12 @@
 import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
-import RecordDrinkModalSection from '@components/RecordDrinkModal/Section';
+import EmotionSection from '@components/RecordDrinkModal/EmotionSection';
 import StatusSection from '@components/RecordDrinkModal/StatusSection';
 import styled from '@emotion/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { format } from 'date-fns';
 import locale from 'date-fns/locale/ko';
 import React, { useEffect } from 'react';
-import { Button, Text } from 'react-native';
+import { Button } from 'react-native';
 import { useSetRecoilState } from 'recoil';
 import { recordDrinkModalAtom } from '../atoms/recordDrinkModal.atoms';
 import { DrinkTypes } from '../models/drinkType';
@@ -27,6 +27,7 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
         { type: DrinkTypes.SOJU, amount: 0 },
       ],
       status: null,
+      emotion: null,
     });
   }, []);
 
@@ -37,9 +38,7 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
       </DateText>
       <DrinkAmountSection />
       <StatusSection />
-      <RecordDrinkModalSection title="기분이 어땠오?">
-        <Text>Test3</Text>
-      </RecordDrinkModalSection>
+      <EmotionSection />
       <Button
         title="Dismiss"
         onPress={() => {

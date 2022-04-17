@@ -1,6 +1,7 @@
+import { DrinkEmotionType } from '@models/drinkEmotion.models';
 import { DrinkStatusType } from '@models/drinkStatus.models';
+import { DrinkTypes } from '@models/drinkType';
 import { atom } from 'recoil';
-import { DrinkTypes } from '../models/drinkType';
 
 type DrinkAmountType = {
   type: DrinkTypes;
@@ -11,6 +12,7 @@ type RecordDrinkModalAtomType = {
   createdAt: Date | null;
   drinkAmounts: DrinkAmountType[];
   status: DrinkStatusType | null;
+  emotion: DrinkEmotionType | null;
 };
 
 export const recordDrinkModalAtom = atom<RecordDrinkModalAtomType>({
@@ -22,5 +24,6 @@ export const recordDrinkModalAtom = atom<RecordDrinkModalAtomType>({
       { type: DrinkTypes.SOJU, amount: 0 },
     ],
     status: null,
+    emotion: null,
   },
 });
