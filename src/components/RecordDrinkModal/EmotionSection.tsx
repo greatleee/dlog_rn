@@ -1,4 +1,5 @@
 import { recordDrinkModalAtom } from '@atoms/recordDrinkModal.atoms';
+import { INACTIVE_IMAGE_OPACITY } from '@constants/styles';
 import {
   DrinkEmotionModelList,
   DrinkEmotionType,
@@ -20,7 +21,7 @@ const EmotionSection: React.FC = () => {
 
   const getOpacity = (emotionType: DrinkEmotionType) => {
     if (state.emotion === emotionType) return 1;
-    else return 0.4;
+    else return INACTIVE_IMAGE_OPACITY;
   };
 
   return (

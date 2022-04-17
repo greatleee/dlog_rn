@@ -1,5 +1,6 @@
-import React from 'react';
+import { INACTIVE_IMAGE_OPACITY } from '@constants/styles';
 import styled from '@emotion/native';
+import React from 'react';
 import RootNavigation from '../../navigators/RootNavigation';
 
 type Props = {
@@ -17,7 +18,7 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
       <DrinkImageTouchable onPress={openRecordDrinkModal}>
         <DrinkImage
           source={require('../../assets/images/soju/empty.png')}
-          style={{ resizeMode: 'cover' }}
+          style={{ resizeMode: 'cover', opacity: INACTIVE_IMAGE_OPACITY }}
         />
       </DrinkImageTouchable>
     </>
@@ -26,7 +27,6 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
 
 const DateText = styled.Text`
   height: 15%;
-  /* background-color: green; */
   font-size: 16px;
   text-align: center;
 `;
@@ -41,7 +41,6 @@ const DrinkImageTouchable = styled.TouchableOpacity`
 const DrinkImage = styled.Image`
   width: 100%;
   height: 90%;
-  opacity: 0.3;
 `;
 
 export default CalendarBodyItem;

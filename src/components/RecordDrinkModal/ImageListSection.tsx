@@ -21,7 +21,10 @@ const StatusSection: React.FC<Props> = ({
     <RecordDrinkModalSection title={title}>
       <ImageList>
         {modelList.map(model => (
-          <StatusImageTouchable onPress={onPressImage.bind(null, model.type)}>
+          <StatusImageTouchable
+            key={model.type}
+            onPress={onPressImage.bind(null, model.type)}
+          >
             <StatusImage
               source={model.imgSrc}
               style={{

@@ -1,4 +1,5 @@
 import { recordDrinkModalAtom } from '@atoms/recordDrinkModal.atoms';
+import { INACTIVE_IMAGE_OPACITY } from '@constants/styles';
 import {
   DrinkStatusModelList,
   DrinkStatusType,
@@ -20,7 +21,7 @@ const StatusSection: React.FC = () => {
 
   const getOpacity = (drinkStatusType: DrinkStatusType) => {
     if (state.status === drinkStatusType) return 1;
-    else return 0.4;
+    else return INACTIVE_IMAGE_OPACITY;
   };
 
   return (

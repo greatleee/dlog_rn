@@ -1,0 +1,1 @@
+export const INACTIVE_IMAGE_OPACITY = 0.3;
