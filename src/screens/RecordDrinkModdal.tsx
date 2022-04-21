@@ -1,3 +1,4 @@
+import Button from '@components/@shared/CustomButton';
 import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
 import EmotionSection from '@components/RecordDrinkModal/EmotionSection';
 import StatusSection from '@components/RecordDrinkModal/StatusSection';
@@ -31,6 +32,12 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
     });
   }, []);
 
+  const close = () => RootNavigation.goBack();
+
+  const submit = () => {
+    close();
+  };
+
   return (
     <Container style={{ flex: 1 }}>
       <DateText>
@@ -39,12 +46,9 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
       <DrinkAmountSection />
       <StatusSection />
       <EmotionSection />
-      <Button
-        title="Dismiss"
-        onPress={() => {
-          RootNavigation.goBack();
-        }}
-      />
+      <Button bgColor="#0000ff" textColor="#ffffff" onPress={submit}>
+        기록하기
+      </Button>
     </Container>
   );
 };
