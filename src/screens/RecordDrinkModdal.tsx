@@ -7,7 +7,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { format } from 'date-fns';
 import locale from 'date-fns/locale/ko';
 import React, { useEffect } from 'react';
-import { Button } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { useSetRecoilState } from 'recoil';
 import { recordDrinkModalAtom } from '../atoms/recordDrinkModal.atoms';
 import { DrinkTypes } from '../models/drinkType';
@@ -40,9 +41,14 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
 
   return (
     <Container style={{ flex: 1 }}>
-      <DateText>
-        {format(new Date(route.params.date), 'MM월 dd일 (E)', { locale })}
-      </DateText>
+      <Header>
+        <TouchableOpacity onPress={close}>
+          <Icon name="close-outline" size={26} />
+        </TouchableOpacity>
+        <DateText>
+          {format(new Date(route.params.date), 'MM월 dd일 (E)', { locale })}
+        </DateText>
+      </Header>
       <DrinkAmountSection />
       <StatusSection />
       <EmotionSection />
@@ -54,12 +60,18 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
 };
 
 const Container = styled.View`
-  padding: 20px 16px;
+  padding: 20px 16px 48px 16px;
+`;
+
+const Header = styled.View`
+  width: 100%;
+  margin-bottom: 16px;
+  flex-direction: row;
 `;
 
 const DateText = styled.Text`
-  width: 100%;
-  margin-bottom: 16px;
+  padding-right: 26px;
+  flex: 1;
   font-size: 20px;
   text-align: center;
 `;

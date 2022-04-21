@@ -12,15 +12,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { RecoilRoot } from 'recoil';
 import TabBar from './components/@shared/TabBar';
@@ -90,7 +83,9 @@ const App = () => {
             <RootStack.Group>
               <RootStack.Screen name="Main" component={Main} />
             </RootStack.Group>
-            <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+            <RootStack.Group
+              screenOptions={{ presentation: 'modal', gestureEnabled: false }}
+            >
               <RootStack.Screen
                 name="RecordDrinkModal"
                 component={RecordDrinkModal}
