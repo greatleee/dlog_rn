@@ -9,8 +9,9 @@ import locale from 'date-fns/locale/ko';
 import React, { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { recordDrinkModalAtom } from '../atoms/recordDrinkModal.atoms';
+import recordsFirestore from '../firestore/records.firestore';
 import { DrinkTypes } from '../models/drinkType';
 import RootNavigation, {
   NavigatorParamList,
@@ -19,23 +20,27 @@ import RootNavigation, {
 type Props = StackScreenProps<NavigatorParamList, 'RecordDrinkModal'>;
 
 const RecordDrinkModal: React.FC<Props> = ({ route }) => {
-  const setRecordDrinkModalState = useSetRecoilState(recordDrinkModalAtom);
+  const [recordState, setRecordDrinkModalState] =
+    useRecoilState(recordDrinkModalAtom);
 
   useEffect(() => {
     setRecordDrinkModalState({
-      createdAt: new Date(route.params.date),
+      id: '',
       drinkAmounts: [
         { type: DrinkTypes.BEER, amount: 0 },
         { type: DrinkTypes.SOJU, amount: 0 },
       ],
       status: null,
       emotion: null,
+      date: new Date(route.params.date),
+      createdAt: new Date(),
     });
   }, []);
 
   const close = () => RootNavigation.goBack();
 
-  const submit = () => {
+  const submit = async () => {
+    await recordsFirestore.createRecord(recordState);
     close();
   };
 

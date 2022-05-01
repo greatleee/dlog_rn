@@ -8,22 +8,26 @@ type DrinkAmountType = {
   amount: number;
 };
 
-type RecordDrinkModalAtomType = {
-  createdAt: Date | null;
+export type RecordDrinkModalAtomType = {
+  id?: string;
   drinkAmounts: DrinkAmountType[];
   status: DrinkStatusType | null;
   emotion: DrinkEmotionType | null;
+  date: Date;
+  createdAt: Date;
 };
 
 export const recordDrinkModalAtom = atom<RecordDrinkModalAtomType>({
   key: 'recordDrinkModal',
   default: {
-    createdAt: null,
+    id: '',
     drinkAmounts: [
       { type: DrinkTypes.BEER, amount: 0 },
       { type: DrinkTypes.SOJU, amount: 0 },
     ],
     status: null,
     emotion: null,
+    date: new Date(),
+    createdAt: new Date(),
   },
 });
