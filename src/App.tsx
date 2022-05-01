@@ -11,7 +11,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -20,6 +20,7 @@ import TabBar from './components/@shared/TabBar';
 import RootNavigation from './navigators/RootNavigation';
 import Calendar from './screens/Calendar';
 import RecordDrinkModal from './screens/RecordDrinkModdal';
+import localStorage from './utils/local-storage';
 
 // const Section: React.FC<{
 //   title: string;
@@ -73,6 +74,10 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    localStorage.initiateUserId();
+  }, []);
 
   return (
     <RecoilRoot>
