@@ -49,9 +49,11 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
           {format(new Date(route.params.date), 'MM월 dd일 (E)', { locale })}
         </DateText>
       </Header>
-      <DrinkAmountSection />
-      <StatusSection />
-      <EmotionSection />
+      <ScrollView>
+        <DrinkAmountSection />
+        <StatusSection />
+        <EmotionSection />
+      </ScrollView>
       <Button bgColor="#0000ff" textColor="#ffffff" onPress={submit}>
         기록하기
       </Button>
@@ -74,6 +76,10 @@ const DateText = styled.Text`
   flex: 1;
   font-size: 20px;
   text-align: center;
+`;
+
+const ScrollView = styled.ScrollView`
+  flex: 1;
 `;
 
 export default RecordDrinkModal;
