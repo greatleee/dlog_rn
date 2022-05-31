@@ -1,9 +1,9 @@
+import styled from '@emotion/native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import CalendarBody from '../components/Calendar/CalendarBody';
 import CalendarHeader from '../components/Calendar/CalendarHeader';
-import styled from '@emotion/native';
 import MonthMover from '../components/Calendar/MonthMover';
 
 type ParamList = {

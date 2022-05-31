@@ -1,10 +1,12 @@
+import { calendarState } from '@atoms/calendar.states';
 import styled from '@emotion/native';
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRecoilState } from 'recoil';
 import { curYearMonthAtom } from '../../atoms/states';
+import recordsFirestore from '../../firestore/records.firestore';
 import Chip from '../@shared/Chip';
 
 const Container = styled.View`
@@ -23,6 +25,16 @@ const IconTouchable = styled.TouchableOpacity`
 
 const MonthMover: React.FC = () => {
   const [curYearMonth, setCurYearMonth] = useRecoilState(curYearMonthAtom);
+  const [calendar, setCalendar] = useRecoilState(calendarState);
+
+  useEffect(() => {
+    loadRecords();
+  }, [curYearMonth]);
+
+  const loadRecords = async () => {
+    const records = await recordsFirestore.getRecords(curYearMonth);
+    setCalendar(records);
+  };
 
   const moveMonth = (step: number) => {
     const date = new Date(curYearMonth);

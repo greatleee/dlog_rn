@@ -9,7 +9,6 @@ type DrinkAmountType = {
 };
 
 export type RecordDrinkModalAtomType = {
-  id?: string;
   drinkAmounts: DrinkAmountType[];
   status: DrinkStatusType | null;
   emotion: DrinkEmotionType | null;
@@ -20,7 +19,6 @@ export type RecordDrinkModalAtomType = {
 export const recordDrinkModalAtom = atom<RecordDrinkModalAtomType>({
   key: 'recordDrinkModal',
   default: {
-    id: '',
     drinkAmounts: [
       { type: DrinkTypes.BEER, amount: 0 },
       { type: DrinkTypes.SOJU, amount: 0 },

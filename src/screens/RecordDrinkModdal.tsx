@@ -25,7 +25,6 @@ const RecordDrinkModal: React.FC<Props> = ({ route }) => {
 
   useEffect(() => {
     setRecordDrinkModalState({
-      id: '',
       drinkAmounts: [
         { type: DrinkTypes.BEER, amount: 0 },
         { type: DrinkTypes.SOJU, amount: 0 },
