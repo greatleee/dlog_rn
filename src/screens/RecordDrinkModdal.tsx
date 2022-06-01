@@ -19,6 +19,7 @@ import RootNavigation, {
 
 type Props = StackScreenProps<NavigatorParamList, 'RecordDrinkModal'>;
 
+// deprecated
 const RecordDrinkModal: React.FC<Props> = ({ route }) => {
   const [recordState, setRecordDrinkModalState] =
     useRecoilState(recordDrinkModalAtom);

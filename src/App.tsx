@@ -19,7 +19,7 @@ import { RecoilRoot } from 'recoil';
 import TabBar from './components/@shared/TabBar';
 import RootNavigation from './navigators/RootNavigation';
 import Calendar from './screens/Calendar';
-import RecordDrinkModal from './screens/RecordDrinkModdal';
+import RecordModal from './screens/RecordModal';
 import localStorage from './utils/local-storage';
 
 // const Section: React.FC<{
@@ -88,38 +88,12 @@ const App = () => {
             <RootStack.Group>
               <RootStack.Screen name="Main" component={Main} />
             </RootStack.Group>
-            <RootStack.Group
-              screenOptions={{ presentation: 'modal', gestureEnabled: false }}
-            >
-              <RootStack.Screen
-                name="RecordDrinkModal"
-                component={RecordDrinkModal}
-              />
-            </RootStack.Group>
           </RootStack.Navigator>
         </NavigationContainer>
+        <RecordModal></RecordModal>
       </SafeAreaProvider>
     </RecoilRoot>
   );
 };
-
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
 
 export default App;

@@ -1,9 +1,11 @@
 import { calendarState } from '@atoms/calendar.states';
+import { recordModalAtom } from '@atoms/record-modal.atoms';
+import { recordDrinkModalAtom } from '@atoms/recordDrinkModal.atoms';
 import { INACTIVE_IMAGE_OPACITY } from '@constants/styles';
 import styled from '@emotion/native';
+import { DrinkTypes } from '@models/drinkType';
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import RootNavigation from '../../navigators/RootNavigation';
 
 type Props = {
   date: Date;
@@ -12,9 +14,30 @@ type Props = {
 
 const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
   const [calendar] = useRecoilState(calendarState);
+  const [isRecordModalVisible, setIsRecordModalVisible] =
+    useRecoilState(recordModalAtom);
+  const [recordState, setRecordDrinkModalState] =
+    useRecoilState(recordDrinkModalAtom);
 
-  const openRecordDrinkModal = () =>
-    RootNavigation.navigate('RecordDrinkModal', { date: date.toISOString() });
+  const openRecordModal = () => {
+    const record = calendar[dateNum.toString()];
+    if (record) {
+      setRecordDrinkModalState(record);
+    } else {
+      setRecordDrinkModalState({
+        drinkAmounts: [
+          { type: DrinkTypes.BEER, amount: 0 },
+          { type: DrinkTypes.SOJU, amount: 0 },
+        ],
+        status: null,
+        emotion: null,
+        date: date,
+        createdAt: new Date(),
+      });
+    }
+
+    setIsRecordModalVisible(true);
+  };
 
   const getDrinkImageComponent = () => {
     const empty = require('../../assets/images/soju/empty.png');
@@ -54,7 +77,7 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
   return (
     <>
       <DateText>{dateNum}</DateText>
-      <DrinkImageTouchable onPress={openRecordDrinkModal}>
+      <DrinkImageTouchable onPress={openRecordModal}>
         {getDrinkImageComponent()}
       </DrinkImageTouchable>
     </>

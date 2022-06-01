@@ -1,12 +1,12 @@
+import colors from '@constants/colors';
+import styled from '@emotion/native';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRecoilState } from 'recoil';
-import colors from '@constants/colors';
-import styled from '@emotion/native';
-import RecordDrinkModalSection from './Section';
-import { DrinkTypes, DrinkTypesInfo } from '../../models/drinkType';
 import { recordDrinkModalAtom } from '../../atoms/recordDrinkModal.atoms';
+import { DrinkTypes, DrinkTypesInfo } from '../../models/drinkType';
+import RecordDrinkModalSection from './Section';
 
 const DrinkAmountSection: React.FC = () => {
   const title = '얼마나 마셨오?';
