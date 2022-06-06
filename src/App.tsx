@@ -64,6 +64,11 @@ const Main = () => {
         component={Calendar}
         options={{ tabBarLabel: '월별캘린더' }}
       />
+      <Tab.Screen
+        name="Setting"
+        component={Calendar}
+        options={{ tabBarLabel: '설정' }}
+      />
     </Tab.Navigator>
   );
 };
