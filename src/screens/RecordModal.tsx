@@ -49,7 +49,7 @@ const RecordModal = () => {
             <StatusSection />
             <EmotionSection />
           </ScrollView>
-          <Button bgColor="#0000ff" textColor="#ffffff" onPress={submit}>
+          <Button bgColor="#56DDA2" textColor="#ffffff" onPress={submit}>
             기록하기
           </Button>
         </StyledView>
