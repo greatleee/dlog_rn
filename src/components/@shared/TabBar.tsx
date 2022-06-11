@@ -17,7 +17,8 @@ function TabBar({ state, descriptors, navigation }) {
 
   const openRecordModal = () => {
     const now = new Date();
-    const record = calendar[now.getDate().toString()];
+    const yesterday = new Date(new Date().setDate(now.getDate() - 1));
+    const record = calendar[yesterday.getDate().toString()];
     if (record) {
       setRecordDrinkModalState(record);
     } else {
@@ -28,8 +29,8 @@ function TabBar({ state, descriptors, navigation }) {
         ],
         status: null,
         emotion: null,
-        date: now,
-        createdAt: new Date(),
+        date: yesterday,
+        createdAt: now,
       });
     }
 
