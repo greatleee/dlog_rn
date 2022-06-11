@@ -1,5 +1,7 @@
+import { calendarState } from '@atoms/calendar.states';
 import { recordModalAtom } from '@atoms/record-modal.atoms';
 import { recordDrinkModalAtom } from '@atoms/recordDrinkModal.atoms';
+import { curYearMonthAtom } from '@atoms/states';
 import Button from '@components/@shared/CustomButton';
 import DrinkAmountSection from '@components/RecordDrinkModal/DrinkAmountSection';
 import EmotionSection from '@components/RecordDrinkModal/EmotionSection';
@@ -7,7 +9,7 @@ import StatusSection from '@components/RecordDrinkModal/StatusSection';
 import styled from '@emotion/native';
 import { format } from 'date-fns';
 import locale from 'date-fns/locale/ko';
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRecoilState } from 'recoil';
@@ -18,13 +20,24 @@ const RecordModal = () => {
     useRecoilState(recordModalAtom);
   const [recordState, setRecordDrinkModalState] =
     useRecoilState(recordDrinkModalAtom);
+  const [curYearMonth, setCurYearMonth] = useRecoilState(curYearMonthAtom);
+  const [calendar, setCalendar] = useRecoilState(calendarState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const close = () => {
     setIsRecordModalVisible(false);
   };
 
+  const loadRecords = async () => {
+    const records = await recordsFirestore.getRecords(curYearMonth);
+    setCalendar(records);
+  };
+
   const submit = async () => {
+    setIsLoading(true);
     await recordsFirestore.createRecord(recordState);
+    await loadRecords();
+    setIsLoading(false);
     close();
   };
 
@@ -49,7 +62,12 @@ const RecordModal = () => {
             <StatusSection />
             <EmotionSection />
           </ScrollView>
-          <Button bgColor="#56DDA2" textColor="#ffffff" onPress={submit}>
+          <Button
+            bgColor="#56DDA2"
+            textColor="#ffffff"
+            isDisabled={isLoading}
+            onPress={submit}
+          >
             기록하기
           </Button>
         </StyledView>
