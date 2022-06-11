@@ -46,10 +46,15 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
     const dizzy = require('../../assets/images/soju/dizzy.png');
     const vomit = require('../../assets/images/soju/vomit.png');
     const blackout = require('../../assets/images/soju/blackout.png');
+    const joy = require('../../assets/images/soju/joy.png');
+    const angry = require('../../assets/images/soju/angry.png');
+    const sad = require('../../assets/images/soju/sad.png');
+    const crying = require('../../assets/images/soju/crying.png');
 
+    const record = calendar[dateNum.toString()];
     let source;
     let opacity = 1;
-    switch (calendar[dateNum.toString()]?.status) {
+    switch (record?.status || record?.emotion) {
       case 'GOOD':
         source = good;
         break;
@@ -65,9 +70,27 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
       case 'BLACK_OUT':
         source = blackout;
         break;
+      case 'JOY':
+        source = joy;
+        break;
+      case 'ANGRY':
+        source = angry;
+        break;
+      case 'SAD':
+        source = sad;
+        break;
+      case 'CRYING':
+        source = crying;
+        break;
       default:
         source = empty;
-        opacity = INACTIVE_IMAGE_OPACITY;
+    }
+    if (
+      !(record?.drinkAmounts.filter(d => d.amount > 0)?.length > 0) &&
+      !record?.status &&
+      !record?.emotion
+    ) {
+      opacity = INACTIVE_IMAGE_OPACITY;
     }
     return (
       <DrinkImage source={source} style={{ resizeMode: 'cover', opacity }} />
