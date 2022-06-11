@@ -20,6 +20,7 @@ import TabBar from './components/@shared/TabBar';
 import RootNavigation from './navigators/RootNavigation';
 import Calendar from './screens/Calendar';
 import RecordModal from './screens/RecordModal';
+import Setting from './screens/Setting';
 import localStorage from './utils/local-storage';
 
 // const Section: React.FC<{
@@ -66,7 +67,7 @@ const Main = () => {
       />
       <Tab.Screen
         name="Setting"
-        component={Calendar}
+        component={Setting}
         options={{ tabBarLabel: '설정' }}
       />
     </Tab.Navigator>
