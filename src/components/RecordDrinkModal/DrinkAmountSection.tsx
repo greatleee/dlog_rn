@@ -53,10 +53,10 @@ const DrinkAmountSection: React.FC = () => {
               style={styles.addButton}
               onPress={changeAmount.bind(null, info.type, 1)}
             >
-              <Icon name="add-outline" size={28}></Icon>
+              <Icon name="add-outline" size={28} color="#131B26"></Icon>
             </TouchableOpacity>
             <TouchableOpacity onPress={changeAmount.bind(null, info.type, -1)}>
-              <Icon name="remove-outline" size={28}></Icon>
+              <Icon name="remove-outline" size={28} color="#131B26"></Icon>
             </TouchableOpacity>
           </Buttons>
         </Row>
@@ -74,6 +74,7 @@ const Row = styled.View`
 
 const Text = styled.Text`
   font-size: 24px;
+  color: #131b26;
 `;
 
 const Buttons = styled.View`

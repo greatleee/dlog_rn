@@ -12,8 +12,9 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 35px;
+  font-size: 25px;
   margin-bottom: 16px;
+  color: #131b26;
 `;
 
 const RecordDrinkModalSection: React.FC<Props> = ({ title, children }) => {

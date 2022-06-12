@@ -45,15 +45,15 @@ const MonthMover: React.FC = () => {
   return (
     <Container>
       <IconTouchable onPress={() => moveMonth(-1)}>
-        <Icon name="chevron-back" size={24} />
+        <Icon name="chevron-back" size={24} color="#131B26" />
       </IconTouchable>
       <Chip bgColor="black">
-        <Text style={{ color: 'white' }}>
+        <Text style={{ color: 'white', fontSize: 12 }}>
           {format(new Date(curYearMonth), 'yyyy년 MM월')}
         </Text>
       </Chip>
       <IconTouchable onPress={() => moveMonth(1)}>
-        <Icon name="chevron-forward" size={24} />
+        <Icon name="chevron-forward" size={24} color="#131B26" />
       </IconTouchable>
     </Container>
   );

@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '@emotion/native';
+import React from 'react';
 
 type Props = {
   bgColor: string;

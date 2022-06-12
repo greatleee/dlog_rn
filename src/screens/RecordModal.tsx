@@ -51,7 +51,7 @@ const RecordModal = () => {
         <StyledView>
           <Header>
             <TouchableOpacity onPress={close}>
-              <Icon name="close-outline" size={26} />
+              <Icon name="close-outline" size={26} color="#131B26" />
             </TouchableOpacity>
             <DateText>
               {format(recordState.date, 'MM월 dd일 (E)', { locale })}
@@ -96,6 +96,7 @@ const DateText = styled.Text`
   flex: 1;
   font-size: 20px;
   text-align: center;
+  color: #131b26;
 `;
 
 const ScrollView = styled.ScrollView`

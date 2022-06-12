@@ -19,6 +19,8 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
   const [recordState, setRecordDrinkModalState] =
     useRecoilState(recordDrinkModalAtom);
 
+  const now = new Date();
+
   const openRecordModal = () => {
     const record = calendar[dateNum.toString()];
     if (record) {
@@ -99,7 +101,15 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
 
   return (
     <>
-      <DateText>{dateNum}</DateText>
+      <DateTextContainer>
+        <DateText
+          isToday={
+            date.getMonth() === now.getMonth() && dateNum === now.getDate()
+          }
+        >
+          {dateNum}
+        </DateText>
+      </DateTextContainer>
       <DrinkImageTouchable onPress={openRecordModal}>
         {getDrinkImageComponent()}
       </DrinkImageTouchable>
@@ -107,22 +117,35 @@ const CalendarBodyItem: React.FC<Props> = ({ date, dateNum }) => {
   );
 };
 
+const DateTextContainer = styled.View`
+  height: 20%;
+  margin-bottom: 2px;
+  align-items: center;
+  justify-content: center;
+`;
+
 const DateText = styled.Text`
-  height: 15%;
-  font-size: 16px;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
   text-align: center;
+  border-radius: 16px;
+  color: #131b26;
+  background-color: ${(props: { isToday: boolean }) =>
+    props.isToday ? '#56DDA2' : 'transparent'};
 `;
 
 const DrinkImageTouchable = styled.TouchableOpacity`
   width: 100%;
-  height: 80%;
+  height: 75%;
   display: flex;
   justify-content: center;
 `;
 
 const DrinkImage = styled.Image`
   width: 100%;
-  height: 90%;
+  height: 100%;
 `;
 
 export default CalendarBodyItem;
